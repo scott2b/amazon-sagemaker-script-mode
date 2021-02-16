@@ -37,7 +37,7 @@ def _dataset_parser(value):
         'label': tf.io.FixedLenFeature([], tf.int64),
     }
 
-    example = tf.parse_single_example(value, featdef)
+    example = tf.io.parse_single_example(value, featdef)
     #image = tf.decode_raw(example['text'], tf.uint8)
     #image.set_shape([DEPTH * HEIGHT * WIDTH])
 
@@ -45,7 +45,7 @@ def _dataset_parser(value):
     #image = tf.cast(
     #    tf.transpose(tf.reshape(image, [DEPTH, HEIGHT, WIDTH]), [1, 2, 0]),
     #    tf.float32)
-    text = tf.decode_raw(example['text'], tf.string)
+    text = tf.io.decode_raw(example['text'], tf.string)
     label = tf.cast(example['label'], tf.int32)
     #image = _train_preprocess_fn(image)
     return text, tf.one_hot(label, NUM_CLASSES)
