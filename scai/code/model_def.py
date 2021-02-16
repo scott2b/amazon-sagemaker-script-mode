@@ -1,20 +1,6 @@
 import tensorflow as tf
-from tensorflow.keras.layers import Activation, Conv2D, Dense, Dropout, Flatten, MaxPooling2D, BatchNormalization
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.optimizers import Adam, SGD, RMSprop
-
-import datetime
-import os
-import shutil
-import time
+#from tensorflow.keras.optimizers import Adam, SGD, RMSprop
 import tensorflow_hub as hub
-import tensorflow_text as text
-import matplotlib.pyplot as plt
-from psutil import virtual_memory
-from pathlib import Path
-from official.nlp import optimization  # to create AdamW optmizer
-from sklearn.metrics import classification_report
-from sklearn.metrics import confusion_matrix
 
 
 HEIGHT = 32
