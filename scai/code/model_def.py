@@ -93,8 +93,8 @@ def get_model(learning_rate, weight_decay, optimizer, momentum, size, mpi=False,
     #init_lr = 1.1999607522739098e-06
     #optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
     classifier_model = build_classifier_model()
-    earlystop_callback = tf.keras.callbacks.EarlyStopping(
-        monitor='val_loss', patience=EARLY_STOPPING_PATIENCE)
+    #earlystop_callback = tf.keras.callbacks.EarlyStopping(
+    #    monitor='val_loss', patience=EARLY_STOPPING_PATIENCE)
     classifier_model.compile(
         optimizer=optimizer,
         loss=get_loss_function(),
