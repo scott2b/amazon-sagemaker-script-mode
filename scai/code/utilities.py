@@ -33,21 +33,22 @@ def _train_preprocess_fn(image):
 def _dataset_parser(value):
 
     featdef = {
-        'image': tf.FixedLenFeature([], tf.string),
-        'label': tf.FixedLenFeature([], tf.int64),
+        'text': tf.io.FixedLenFeature([], tf.string),
+        'label': tf.io.FixedLenFeature([], tf.int64),
     }
 
     example = tf.parse_single_example(value, featdef)
-    image = tf.decode_raw(example['image'], tf.uint8)
-    image.set_shape([DEPTH * HEIGHT * WIDTH])
+    #image = tf.decode_raw(example['text'], tf.uint8)
+    #image.set_shape([DEPTH * HEIGHT * WIDTH])
 
     # Reshape from [depth * height * width] to [depth, height, width].
-    image = tf.cast(
-        tf.transpose(tf.reshape(image, [DEPTH, HEIGHT, WIDTH]), [1, 2, 0]),
-        tf.float32)
+    #image = tf.cast(
+    #    tf.transpose(tf.reshape(image, [DEPTH, HEIGHT, WIDTH]), [1, 2, 0]),
+    #    tf.float32)
+    text = tf.decode_raw(example['text'], tf.string)
     label = tf.cast(example['label'], tf.int32)
-    image = _train_preprocess_fn(image)
-    return image, tf.one_hot(label, NUM_CLASSES)
+    #image = _train_preprocess_fn(image)
+    return text, tf.one_hot(label, NUM_CLASSES)
 
 
 def process_input(epochs, batch_size, channel, channel_name, data_config):
