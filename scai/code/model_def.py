@@ -86,8 +86,8 @@ def get_model(learning_rate, weight_decay, optimizer, momentum, size, mpi=False,
     #    num_train_steps=num_train_steps,
     #    num_warmup_steps=num_warmup_steps,
     #    optimizer_type='adamw')
-    init_lr = 1.1999607522739098e-06
-    optimizer = tf.keras.optimizers.Adam(learning_rate=init_lr)
+    #init_lr = 1.1999607522739098e-06
+    #optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
     classifier_model = build_classifier_model()
     earlystop_callback = tf.keras.callbacks.EarlyStopping(
         monitor='val_loss', patience=EARLY_STOPPING_PATIENCE)
