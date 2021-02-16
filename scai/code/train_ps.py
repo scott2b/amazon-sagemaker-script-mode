@@ -15,7 +15,7 @@ from utilities import process_input
 
 
 logging.getLogger().setLevel(logging.INFO)
-tf.logging.set_verbosity(tf.logging.ERROR)
+tf.compat.v1.logging.set_verbosity(tf.logging.ERROR)
 
 
 #  Copy inference pre/post-processing script so it will be included in the model package
