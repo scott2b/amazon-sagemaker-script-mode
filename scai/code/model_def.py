@@ -54,6 +54,10 @@ def make_preprocess_model(sentence_features, preprocessor_url):
     return tf.keras.Model(input_segments, model_inputs)
 
 
+tfhub_handle_preprocess = 'https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3'
+tfhub_handle_encoder = 'https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-2_H-128_A-2/1'
+
+
 def build_classifier_model():
   text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name='text')
   #preprocessing_layer = hub.KerasLayer(tfhub_handle_preprocess, name='preprocessing')
