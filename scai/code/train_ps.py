@@ -86,11 +86,12 @@ def main(args):
     #print(train_dataset[1])
     X = train_dataset['text']
     print('X')
-    X = X.numpy()
+    #X = X.numpy()
+    X = tf.strings.unicode_encode(X, 'UTF-8')
     print(X)
     y = train_dataset['label']
     print('y')
-    y = y.numpy()
+    #y = y.numpy()
     print(y)
     history = model.fit(
               x=X, y=y,
