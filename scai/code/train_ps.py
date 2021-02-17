@@ -79,19 +79,19 @@ def main(args):
         callbacks.append(CustomTensorBoardCallback(log_dir=tensorboard_dir))
 
     logging.info("Starting training")
-    print('train_dataset[0]')
-    print(train_dataset[0])
-    print('train_dataset[1]')
-    print(train_dataset[1])
-    history = model.fit(x=train_dataset[0], 
-              y=train_dataset[1],
+    #print('train_dataset[0]')
+    #print(train_dataset[0])
+    #print('train_dataset[1]')
+    #print(train_dataset[1])
+    history = model.fit(x=train_dataset['text'], 
+              y=train_dataset['label'],
               steps_per_epoch=(num_examples_per_epoch('train') // args.batch_size) // size,
               epochs=args.epochs, 
               validation_data=validation_dataset,
               validation_steps=(num_examples_per_epoch('validation') // args.batch_size) // size, callbacks=callbacks)
 
-    score = model.evaluate(eval_dataset[0], 
-                           eval_dataset[1], 
+    score = model.evaluate(eval_dataset['text'], 
+                           eval_dataset['label'], 
                            steps=num_examples_per_epoch('eval') // args.batch_size,
                            verbose=0)
 
