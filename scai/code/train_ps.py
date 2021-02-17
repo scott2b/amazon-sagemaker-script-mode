@@ -48,7 +48,8 @@ def save_history(path, history):
 def save_model(model, output):
 
     # create a TensorFlow SavedModel for deployment to a SageMaker endpoint with TensorFlow Serving
-    tf.contrib.saved_model.save_keras_model(model, args.model_dir)
+    #tf.contrib.saved_model.save_keras_model(model, args.model_dir)
+    model.save(output, include_optimizer=False)
     logging.info("Model successfully saved at: {}".format(output))
     return
 
@@ -87,7 +88,7 @@ def main(args):
     X = train_dataset['text']
     print('X')
     #X = X.numpy()
-    X = tf.strings.unicode_decode(X, 'UTF-8')
+    #X = tf.strings.unicode_decode(X, 'UTF-8')
     print(X)
     y = train_dataset['label']
     print('y')
