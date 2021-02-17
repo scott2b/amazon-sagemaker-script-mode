@@ -40,10 +40,15 @@ def save_history(path, history):
         print('key:', key)
         print('value:', history.history[key])
         if type(history.history[key]) == np.ndarray:
+            print('NDARRAY')
             history_for_json[key] = history.history[key].tolist()
         elif type(history.history[key]) == list:
-           if  type(history.history[key][0]) == np.float32 or type(history.history[key][0]) == np.float64:
-               history_for_json[key] = list(map(float, history.history[key]))
+            print('LIST') 
+            if  type(history.history[key][0]) == np.float32 or type(history.history[key][0]) == np.float64:
+                print('FLOAT')
+                history_for_json[key] = list(map(float, history.history[key]))
+            else:
+                print('Unknown list type:', type(history.history[key][0]))
         else:
            print('Unkown history value type:', type(history.history[key]))
 
