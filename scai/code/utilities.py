@@ -48,9 +48,11 @@ def _dataset_parser(value):
     #    tf.float32)
     #text = tf.io.decode_raw(example['text'], tf.float32)
     text = example['text']
-    label = tf.cast(example['label'], tf.int32)
+    #label = tf.cast(example['label'], tf.int32)
     #image = _train_preprocess_fn(image)
-    return text, tf.one_hot(label, NUM_CLASSES)
+    #return text, tf.one_hot(label, NUM_CLASSES)
+    label = example['label']
+    return text, label
 
 
 def process_input(epochs, batch_size, channel, channel_name, data_config):
