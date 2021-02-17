@@ -33,14 +33,22 @@ class CustomTensorBoardCallback(TensorBoard):
 def save_history(path, history):
 
     history_for_json = {}
+    print('saving history path:', path)
+    print(history)
     # transform float values that aren't json-serializable
     for key in list(history.history.keys()):
+        print('key:', key)
+        print('value:', history.history[key])
         if type(history.history[key]) == np.ndarray:
             history_for_json[key] = history.history[key].tolist()
         elif type(history.history[key]) == list:
            if  type(history.history[key][0]) == np.float32 or type(history.history[key][0]) == np.float64:
                history_for_json[key] = list(map(float, history.history[key]))
+        else:
+           print('Unkown history value type:', type(history.history[key]))
 
+    print('saving history for json:')
+    print(history_for_json)
     with codecs.open(path, 'w', encoding='utf-8') as f:
         json.dump(history_for_json, f, separators=(',', ':'), sort_keys=True, indent=4) 
 

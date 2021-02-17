@@ -2,6 +2,7 @@ import tensorflow as tf
 #from tensorflow.keras.optimizers import Adam, SGD, RMSprop
 import tensorflow_hub as hub
 import tensorflow_text
+from tensorflow.keras.optimizers import Adam, SGD, RMSprop
 
 
 HEIGHT = 32
@@ -68,6 +69,13 @@ def get_metrics_function():
 
 def get_model(learning_rate, weight_decay, optimizer, momentum, size, mpi=False, hvd=False):
 
+    if optimizer.lower() == 'sgd':
+        opt = SGD(lr=learning_rate * size, decay=weight_decay, momentum=momentum)
+    elif optimizer.lower() == 'rmsprop':
+        opt = RMSprop(lr=learning_rate * size, decay=weight_decay)
+    else:
+        opt = Adam(lr=learning_rate * size, decay=weight_decay)
+
     #steps_per_epoch = tf.data.experimental.cardinality(train_ds).numpy()
     #num_train_steps = steps_per_epoch * EPOCHS
     #num_warmup_steps = int(0.1*num_train_steps)
@@ -83,9 +91,9 @@ def get_model(learning_rate, weight_decay, optimizer, momentum, size, mpi=False,
     #earlystop_callback = tf.keras.callbacks.EarlyStopping(
     #    monitor='val_loss', patience=EARLY_STOPPING_PATIENCE)
     classifier_model.compile(
-        optimizer=optimizer,
-        loss=get_loss_function(),
-        metrics=get_metrics_function())
+        optimizer=opt,
+        loss='binary_crossentropy',
+        metrics=['accuracy'])
     #print(f'Training model with {tfhub_handle_encoder}')
     #start = time.time()
     #history = classifier_model.fit(
