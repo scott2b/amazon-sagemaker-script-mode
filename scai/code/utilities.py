@@ -35,7 +35,7 @@ def _dataset_parser(value):
 
     featdef = {
         'text': tf.io.FixedLenFeature([], tf.string),
-        'label': tf.io.FixedLenFeature([], tf.int64),
+        'label': tf.io.FixedLenFeature([], tf.int32),
     }
 
     example = tf.io.parse_single_example(value, featdef)
@@ -47,12 +47,13 @@ def _dataset_parser(value):
     #    tf.transpose(tf.reshape(image, [DEPTH, HEIGHT, WIDTH]), [1, 2, 0]),
     #    tf.float32)
     #text = tf.io.decode_raw(example['text'], tf.float32)
-    text = example['text']
     #label = tf.cast(example['label'], tf.int32)
     #image = _train_preprocess_fn(image)
     #return text, tf.one_hot(label, NUM_CLASSES)
-    label = example['label']
-    return text, label
+    #text = example['text']
+    #label = example['label']
+    #return text, label
+    return example
 
 
 def process_input(epochs, batch_size, channel, channel_name, data_config):
@@ -71,8 +72,8 @@ def process_input(epochs, batch_size, channel, channel_name, data_config):
     dataset = dataset.prefetch(10)
 
     # Parse records.
-    #dataset = dataset.map(
-    #    _dataset_parser, num_parallel_calls=10)
+    dataset = dataset.map(
+        _dataset_parser, num_parallel_calls=10)
 
     # Potentially shuffle records.
     if channel_name == 'train':
