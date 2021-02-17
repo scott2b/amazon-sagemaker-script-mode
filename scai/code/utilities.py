@@ -85,6 +85,12 @@ def process_input(epochs, batch_size, channel, channel_name, data_config):
     iterator = iter(dataset)
     #print(iterator)
     image_batch = iterator.get_next()
+    X = [x for x, y in image_batch]
+    print('X')
+    print(X[:3])
+    y = [y for x, y in image_batch]
+    print('y')
+    print(y[:3])
     #print('BATCH:')
     #print(image_batch)
     #print("BATCH['text']")
@@ -96,5 +102,5 @@ def process_input(epochs, batch_size, channel, channel_name, data_config):
     #print('BATCH[1]:')
     #print(image_batch[1])
     #return image_batch, label_batch
-    return image_batch
+    return X, y
 
