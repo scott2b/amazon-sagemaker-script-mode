@@ -45,7 +45,7 @@ def _dataset_parser(value):
     #image = tf.cast(
     #    tf.transpose(tf.reshape(image, [DEPTH, HEIGHT, WIDTH]), [1, 2, 0]),
     #    tf.float32)
-    text = tf.io.decode_raw(example['text'], tf.string)
+    text = tf.io.decode_raw(example['text'], tf.float32)
     label = tf.cast(example['label'], tf.int32)
     #image = _train_preprocess_fn(image)
     return text, tf.one_hot(label, NUM_CLASSES)
@@ -67,8 +67,8 @@ def process_input(epochs, batch_size, channel, channel_name, data_config):
     dataset = dataset.prefetch(10)
 
     # Parse records.
-    #dataset = dataset.map(
-    #    _dataset_parser, num_parallel_calls=10)
+    dataset = dataset.map(
+        _dataset_parser, num_parallel_calls=10)
 
     # Potentially shuffle records.
     if channel_name == 'train':
@@ -84,16 +84,16 @@ def process_input(epochs, batch_size, channel, channel_name, data_config):
     #iterator = dataset.make_one_shot_iterator()
     iterator = iter(dataset)
     #print(iterator)
-    image_batch = iterator.get_next()
-    image_batch = image_batch.numpy()
+    #image_batch = iterator.get_next()
+    #image_batch = image_batch.numpy()
     #print('numpy:')
     #print(image_batch)
-    print('X')
-    X = [x for x, y in image_batch]
-    print(X[:3])
-    print('y')
-    y = [y for x, y in image_batch]
-    print(y[:3])
+    #print('X')
+    #X = [x for x, y in image_batch]
+    #print(X[:3])
+    #print('y')
+    #y = [y for x, y in image_batch]
+    #print(y[:3])
     #print('BATCH:')
     #print(image_batch)
     #print("BATCH['text']")
@@ -105,5 +105,7 @@ def process_input(epochs, batch_size, channel, channel_name, data_config):
     #print('BATCH[1]:')
     #print(image_batch[1])
     #return image_batch, label_batch
-    return X, y
+    batch = iterator.get_next()
+    print(batch)
+    return batch
 
