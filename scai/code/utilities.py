@@ -83,7 +83,7 @@ def process_input(epochs, batch_size, channel, channel_name, data_config):
     #print(dataset)
     #iterator = dataset.make_one_shot_iterator()
     iterator = iter(dataset)
-    print(iterator)
+    #print(iterator)
     image_batch = iterator.get_next()
     #print('BATCH:')
     #print(image_batch)
