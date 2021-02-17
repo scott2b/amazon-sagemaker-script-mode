@@ -71,8 +71,8 @@ def process_input(epochs, batch_size, channel, channel_name, data_config):
     dataset = dataset.prefetch(10)
 
     # Parse records.
-    dataset = dataset.map(
-        _dataset_parser, num_parallel_calls=10)
+    #dataset = dataset.map(
+    #    _dataset_parser, num_parallel_calls=10)
 
     # Potentially shuffle records.
     if channel_name == 'train':
