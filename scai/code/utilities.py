@@ -1,6 +1,7 @@
 import logging
 import os
 import tensorflow as tf
+import tensorflow_text
 
 from model_def import HEIGHT, WIDTH, DEPTH, NUM_CLASSES
 

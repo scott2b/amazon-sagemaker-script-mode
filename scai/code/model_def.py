@@ -1,6 +1,7 @@
 import tensorflow as tf
 #from tensorflow.keras.optimizers import Adam, SGD, RMSprop
 import tensorflow_hub as hub
+import tensorflow_text
 
 
 HEIGHT = 32

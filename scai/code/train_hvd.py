@@ -7,6 +7,7 @@ import os
 import re
 
 import tensorflow as tf
+import tensorflow_text
 import tensorflow.keras.backend as K
 from tensorflow.keras.callbacks import TensorBoard, ModelCheckpoint
 
