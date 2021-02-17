@@ -36,7 +36,7 @@ def save_history(path, history):
     # transform float values that aren't json-serializable
     for key in list(history.history.keys()):
         if type(history.history[key]) == np.ndarray:
-            history_for_json[key] == history.history[key].tolist()
+            history_for_json[key] = history.history[key].tolist()
         elif type(history.history[key]) == list:
            if  type(history.history[key][0]) == np.float32 or type(history.history[key][0]) == np.float64:
                history_for_json[key] = list(map(float, history.history[key]))
@@ -100,7 +100,9 @@ def main(args):
 
     # PS: Save model and history only on worker 0
     if args.current_host == args.hosts[0]:
+        print('Worker 0 saving history')
         save_history(args.model_dir + "/ps_history.p", history)
+        print('Worker 0 saving model')
         save_model(model, args.model_dir)
 
 
