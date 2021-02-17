@@ -85,6 +85,9 @@ def process_input(epochs, batch_size, channel, channel_name, data_config):
     iterator = iter(dataset)
     #print(iterator)
     image_batch = iterator.get_next()
+    image_batch = image_batch.numpy()
+    print('numpy:')
+    print(image_batch)
     X = [x for x, y in image_batch]
     print('X')
     print(X[:3])
