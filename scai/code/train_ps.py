@@ -99,7 +99,7 @@ def main(args):
               x=X, y=y,
               steps_per_epoch=(num_examples_per_epoch('train') // args.batch_size) // size,
               epochs=args.epochs, 
-              validation_data=validation_dataset,
+              validation_data=(validation_dataset['text'], validation_dataset['label']),
               validation_steps=(num_examples_per_epoch('validation') // args.batch_size) // size,
               callbacks=callbacks)
 
