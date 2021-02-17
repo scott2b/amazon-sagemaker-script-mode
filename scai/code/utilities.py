@@ -110,6 +110,6 @@ def process_input(epochs, batch_size, channel, channel_name, data_config):
     #print(image_batch[1])
     #return image_batch, label_batch
     batch = iterator.get_next()
-    #print(batch)
+    print(batch)
     return batch
 
