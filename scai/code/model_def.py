@@ -76,31 +76,11 @@ def get_model(learning_rate, weight_decay, optimizer, momentum, size, mpi=False,
     else:
         opt = Adam(lr=learning_rate * size, decay=weight_decay)
 
-    #steps_per_epoch = tf.data.experimental.cardinality(train_ds).numpy()
-    #num_train_steps = steps_per_epoch * EPOCHS
-    #num_warmup_steps = int(0.1*num_train_steps)
-    #init_lr = 5e-5
-    #optimizer = optimization.create_optimizer(
-    #    init_lr=init_lr,
-    #    num_train_steps=num_train_steps,
-    #    num_warmup_steps=num_warmup_steps,
-    #    optimizer_type='adamw')
-    #init_lr = 1.1999607522739098e-06
-    #optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
     classifier_model = build_classifier_model()
-    #earlystop_callback = tf.keras.callbacks.EarlyStopping(
-    #    monitor='val_loss', patience=EARLY_STOPPING_PATIENCE)
     classifier_model.compile(
         optimizer=opt,
-        loss='binary_crossentropy',
-        metrics=['accuracy'])
-    #print(f'Training model with {tfhub_handle_encoder}')
-    #start = time.time()
-    #history = classifier_model.fit(
-    #    x=train_ds,
-    #    validation_data=val_ds,
-    #    callbacks=[earlystop_callback],
-    #    epochs=EPOCHS)
-    #end = time.time()
-    #print('Completed training in (minutes):', (end - start)/60)
+        loss=get_loss_function(),
+        metrics=get_metrics_function())
+        #loss='binary_crossentropy',
+        #metrics=['accuracy'])
     return classifier_model
