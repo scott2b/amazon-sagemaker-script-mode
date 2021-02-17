@@ -47,8 +47,8 @@ tfhub_handle_encoder = 'https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_
 
 def build_classifier_model():
   text_input = tf.keras.layers.Input(shape=(), dtype=tf.string, name='text')
-  #preprocessing_layer = hub.KerasLayer(tfhub_handle_preprocess, name='preprocessing')
-  preprocessing_layer = make_preprocess_model(['text'], tfhub_handle_preprocess)
+  preprocessing_layer = hub.KerasLayer(tfhub_handle_preprocess, name='preprocessing')
+  #preprocessing_layer = make_preprocess_model(['text'], tfhub_handle_preprocess)
   encoder_inputs = preprocessing_layer(text_input)
   encoder = hub.KerasLayer(tfhub_handle_encoder, trainable=True, name='BERT_encoder')
   outputs = encoder(encoder_inputs)

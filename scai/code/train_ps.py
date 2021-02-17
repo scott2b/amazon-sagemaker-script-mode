@@ -99,7 +99,8 @@ def main(args):
               steps_per_epoch=(num_examples_per_epoch('train') // args.batch_size) // size,
               epochs=args.epochs, 
               validation_data=validation_dataset,
-              validation_steps=(num_examples_per_epoch('validation') // args.batch_size) // size, callbacks=callbacks)
+              validation_steps=(num_examples_per_epoch('validation') // args.batch_size) // size,
+              callbacks=callbacks)
 
     score = model.evaluate(eval_dataset['text'], 
                            eval_dataset['label'], 
