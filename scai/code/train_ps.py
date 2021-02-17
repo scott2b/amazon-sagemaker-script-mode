@@ -87,7 +87,7 @@ def main(args):
     X = train_dataset['text']
     print('X')
     #X = X.numpy()
-    X = tf.strings.unicode_encode(X, 'UTF-8')
+    X = tf.strings.unicode_decode(X, 'UTF-8')
     print(X)
     y = train_dataset['label']
     print('y')

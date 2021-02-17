@@ -34,7 +34,7 @@ def _train_preprocess_fn(image):
 def _dataset_parser(value):
 
     featdef = {
-        'text': tf.io.FixedLenFeature([], tf.int32),
+        'text': tf.io.FixedLenFeature([], tf.string),
         'label': tf.io.FixedLenFeature([], tf.int64),
     }
 
