@@ -79,7 +79,10 @@ def main(args):
         callbacks.append(CustomTensorBoardCallback(log_dir=tensorboard_dir))
 
     logging.info("Starting training")
-
+    print('train_dataset[0]')
+    print(train_dataset[0])
+    print('train_dataset[1]')
+    print(train_dataset[1])
     history = model.fit(x=train_dataset[0], 
               y=train_dataset[1],
               steps_per_epoch=(num_examples_per_epoch('train') // args.batch_size) // size,
