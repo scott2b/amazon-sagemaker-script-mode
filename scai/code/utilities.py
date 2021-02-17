@@ -86,13 +86,13 @@ def process_input(epochs, batch_size, channel, channel_name, data_config):
     #print(iterator)
     image_batch = iterator.get_next()
     image_batch = image_batch.numpy()
-    print('numpy:')
-    print(image_batch)
-    X = [x for x, y in image_batch]
+    #print('numpy:')
+    #print(image_batch)
     print('X')
+    X = [x for x, y in image_batch]
     print(X[:3])
-    y = [y for x, y in image_batch]
     print('y')
+    y = [y for x, y in image_batch]
     print(y[:3])
     #print('BATCH:')
     #print(image_batch)
