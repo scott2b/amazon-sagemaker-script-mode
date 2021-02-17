@@ -44,7 +44,7 @@ def save_history(path, history):
             history_for_json[key] = history.history[key].tolist()
         elif type(history.history[key]) == list:
             print('LIST') 
-            if  type(history.history[key][0]) == np.float32 or type(history.history[key][0]) == np.float64:
+            if  type(history.history[key][0]) == np.float32 or type(history.history[key][0]) == np.float64 or type(history.history[key][0]) == float:
                 print('FLOAT')
                 history_for_json[key] = list(map(float, history.history[key]))
             else:
