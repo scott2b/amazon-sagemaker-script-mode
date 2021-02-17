@@ -79,21 +79,9 @@ def main(args):
     if args.current_host == args.hosts[0]:
         callbacks.append(ModelCheckpoint(args.output_data_dir + '/checkpoint-{epoch}.h5'))
         callbacks.append(CustomTensorBoardCallback(log_dir=tensorboard_dir))
-
     logging.info("Starting training")
-    #print('train_dataset[0]')
-    #print(train_dataset[0])
-    #print('train_dataset[1]')
-    #print(train_dataset[1])
     X = train_dataset['text']
-    print('X')
-    #X = X.numpy()
-    #X = tf.strings.unicode_decode(X, 'UTF-8')
-    print(X)
     y = train_dataset['label']
-    print('y')
-    #y = y.numpy()
-    print(y)
     history = model.fit(
               x=X, y=y,
               steps_per_epoch=(num_examples_per_epoch('train') // args.batch_size) // size,

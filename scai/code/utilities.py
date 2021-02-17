@@ -84,33 +84,7 @@ def process_input(epochs, batch_size, channel, channel_name, data_config):
 
     # Batch it up.
     dataset = dataset.batch(batch_size, drop_remainder=True)
-    #print('BATCH IT UP')
-    #print(dataset)
-    #iterator = dataset.make_one_shot_iterator()
     iterator = iter(dataset)
-    #print(iterator)
-    #image_batch = iterator.get_next()
-    #image_batch = image_batch.numpy()
-    #print('numpy:')
-    #print(image_batch)
-    #print('X')
-    #X = [x for x, y in image_batch]
-    #print(X[:3])
-    #print('y')
-    #y = [y for x, y in image_batch]
-    #print(y[:3])
-    #print('BATCH:')
-    #print(image_batch)
-    #print("BATCH['text']")
-    #print(image_batch['text'])
-    #print("BATCH['label']")
-    #print(image_batch['label'])
-    #print('BATCH[0]:')
-    #print(image_batch[0])
-    #print('BATCH[1]:')
-    #print(image_batch[1])
-    #return image_batch, label_batch
     batch = iterator.get_next()
-    print(batch)
     return batch
 
