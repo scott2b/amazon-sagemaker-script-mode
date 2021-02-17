@@ -84,8 +84,16 @@ def main(args):
     #print(train_dataset[0])
     #print('train_dataset[1]')
     #print(train_dataset[1])
-    history = model.fit(x=train_dataset['text'], 
-              y=train_dataset['label'],
+    X = train_dataset['text']
+    print('X')
+    X = X.numpy()
+    print(X)
+    y = train_dataset['label']
+    print('y')
+    y = y.numpy()
+    print(y)
+    history = model.fit(
+              x=X, y=y,
               steps_per_epoch=(num_examples_per_epoch('train') // args.batch_size) // size,
               epochs=args.epochs, 
               validation_data=validation_dataset,
