@@ -35,7 +35,7 @@ def _dataset_parser(value):
 
     featdef = {
         'text': tf.io.FixedLenFeature([], tf.string),
-        'label': tf.io.FixedLenFeature([], tf.int32),
+        'label': tf.io.FixedLenFeature([], tf.int64),
     }
 
     example = tf.io.parse_single_example(value, featdef)
