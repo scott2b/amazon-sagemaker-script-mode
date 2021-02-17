@@ -42,8 +42,10 @@ def make_preprocess_model(sentence_features, preprocessor_url):
     return tf.keras.Model(input_segments, model_inputs)
 
 
-tfhub_handle_preprocess = 'https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3'
-tfhub_handle_encoder = 'https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-2_H-128_A-2/1'
+#tfhub_handle_preprocess = 'https://tfhub.dev/tensorflow/bert_en_uncased_preprocess/3'
+#tfhub_handle_encoder = 'https://tfhub.dev/tensorflow/small_bert/bert_en_uncased_L-2_H-128_A-2/1'
+tfhub_handle_preprocess = 'https://tfhub.dev/tensorflow/albert_en_preprocess/2'
+tfhub_handle_encoder = 'https://tfhub.dev/tensorflow/albert_en_base/2'
 
 
 def build_classifier_model():
