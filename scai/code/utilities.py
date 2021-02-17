@@ -45,7 +45,8 @@ def _dataset_parser(value):
     #image = tf.cast(
     #    tf.transpose(tf.reshape(image, [DEPTH, HEIGHT, WIDTH]), [1, 2, 0]),
     #    tf.float32)
-    text = tf.io.decode_raw(example['text'], tf.float32)
+    #text = tf.io.decode_raw(example['text'], tf.float32)
+    text = example['text']
     label = tf.cast(example['label'], tf.int32)
     #image = _train_preprocess_fn(image)
     return text, tf.one_hot(label, NUM_CLASSES)
