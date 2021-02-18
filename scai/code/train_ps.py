@@ -67,6 +67,9 @@ def main(args):
     train_dataset = process_input(args.epochs, args.batch_size, args.train, 'train', args.data_config)
     eval_dataset = process_input(args.epochs, args.batch_size, args.eval, 'eval', args.data_config)
     validation_dataset = process_input(args.epochs, args.batch_size, args.validation, 'validation', args.data_config)
+    print('train_dataset type:', type(train_dataset))
+    print('eval_dataset type:', type(eval_dataset))
+    print('validation_dataset type:', type(validation_dataset))
 
     logging.info("configuring model")
     logging.info("Hosts: "+ os.environ.get('SM_HOSTS'))
