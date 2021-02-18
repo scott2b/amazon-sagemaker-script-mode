@@ -93,8 +93,6 @@ def main(args):
     y = train_dataset['label']
     print('LENGTH of X:', len(X))
     print('LENGTH of y:', len(y))
-    for i in range(10):
-        print(y[i], X[i][:50])
     history = model.fit(
               x=X, y=y,
               steps_per_epoch=(num_examples_per_epoch('train') // args.batch_size) // size,
