@@ -3,7 +3,7 @@ import os
 import tensorflow as tf
 import tensorflow_text
 
-from model_def import HEIGHT, WIDTH, DEPTH, NUM_CLASSES
+#from model_def import HEIGHT, WIDTH, DEPTH, NUM_CLASSES
 
 
 NUM_DATA_BATCHES = 5
@@ -17,18 +17,18 @@ def _get_filenames(channel_name, channel):
         raise ValueError('Invalid data subset "%s"' % channel_name)
         
 
-def _train_preprocess_fn(image):
-
-    # Resize the image to add four extra pixels on each side.
-    image = tf.image.resize_image_with_crop_or_pad(image, HEIGHT + 8, WIDTH + 8)
-
-    # Randomly crop a [HEIGHT, WIDTH] section of the image.
-    image = tf.random_crop(image, [HEIGHT, WIDTH, DEPTH])
-
-    # Randomly flip the image horizontally.
-    image = tf.image.random_flip_left_right(image)
-
-    return image
+#def _train_preprocess_fn(image):
+#
+#    # Resize the image to add four extra pixels on each side.
+#    image = tf.image.resize_image_with_crop_or_pad(image, HEIGHT + 8, WIDTH + 8)
+#
+#    # Randomly crop a [HEIGHT, WIDTH] section of the image.
+#    image = tf.random_crop(image, [HEIGHT, WIDTH, DEPTH])
+#
+#    # Randomly flip the image horizontally.
+#    image = tf.image.random_flip_left_right(image)
+#
+#    return image
 
 
 def _dataset_parser(value):
