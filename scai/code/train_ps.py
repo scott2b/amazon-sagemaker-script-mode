@@ -65,7 +65,7 @@ def main(args):
 
     ### build optimizer
     steps_per_epoch = tf.data.experimental.cardinality(train_dataset).numpy()
-    num_train_steps = steps_per_epoch * EPOCHS
+    num_train_steps = steps_per_epoch * args.epochs
     num_warmup_steps = int(0.1*num_train_steps)
     init_lr = 5e-5
     optimizer = optimization.create_optimizer(
