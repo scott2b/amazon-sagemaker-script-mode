@@ -32,13 +32,18 @@ def _train_preprocess_fn(image):
 
 
 def _dataset_parser(value):
-
-    featdef = {
-        'text': tf.io.FixedLenFeature([], tf.string),
-        'label': tf.io.FixedLenFeature([], tf.int64),
+    featdef = {                                                          
+        'text': tf.io.FixedLenFeature([], tf.string),                           
+        'label': tf.io.FixedLenFeature([], tf.int64)                           
     }
+    example = tf.io.parse_example(value[tf.newaxis], featdef)
+    return example['text'][0], example['label'][0]
 
-    example = tf.io.parse_single_example(value, featdef)
+    #featdef = {
+    #    'text': tf.io.FixedLenFeature([], tf.string),
+    #    'label': tf.io.FixedLenFeature([], tf.int64),
+    #}
+    #example = tf.io.parse_single_example(value, featdef)
     #image = tf.decode_raw(example['text'], tf.uint8)
     #image.set_shape([DEPTH * HEIGHT * WIDTH])
 
