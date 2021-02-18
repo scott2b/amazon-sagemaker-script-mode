@@ -31,7 +31,6 @@ class CustomTensorBoardCallback(TensorBoard):
     
     
 def save_history(path, history):
-
     history_for_json = {}
     # transform float values that aren't json-serializable
     for key in list(history.history.keys()):
@@ -40,13 +39,11 @@ def save_history(path, history):
         elif type(history.history[key]) == list:
             if  type(history.history[key][0]) == np.float32 or type(history.history[key][0]) == np.float64 or type(history.history[key][0]) == float:
                 history_for_json[key] = list(map(float, history.history[key]))
-
     with codecs.open(path, 'w', encoding='utf-8') as f:
         json.dump(history_for_json, f, separators=(',', ':'), sort_keys=True, indent=4) 
 
 
 def save_model(model, output):
-
     # create a TensorFlow SavedModel for deployment to a SageMaker endpoint with TensorFlow Serving
     #tf.contrib.saved_model.save_keras_model(model, args.model_dir)
     model.save(output, include_optimizer=False)
@@ -55,14 +52,11 @@ def save_model(model, output):
 
 
 def main(args):
-
     if 'sourcedir.tar.gz' in args.tensorboard_dir:
         tensorboard_dir = re.sub('source/sourcedir.tar.gz', 'model', args.tensorboard_dir)
     else:
         tensorboard_dir = args.tensorboard_dir
-
     logging.info("Writing TensorBoard logs to {}".format(tensorboard_dir))
-
     logging.info("getting data")
     train_dataset = process_input(args.epochs, args.batch_size, args.train, 'train', args.data_config)
     eval_dataset = process_input(args.epochs, args.batch_size, args.eval, 'eval', args.data_config)
@@ -76,13 +70,9 @@ def main(args):
     #print('validation_dataset type:', type(validation_dataset))
     #print('validation_dataset text type:', type(validation_dataset['text']))
     #print('validation_dataset label type:', type(validation_dataset['label']))
-
     logging.info("configuring model")
     logging.info("Hosts: "+ os.environ.get('SM_HOSTS'))
-
     size = len(args.hosts)
-
-    #Deal with this
     model = get_model(args.learning_rate, args.weight_decay, args.optimizer, args.momentum, size)
     callbacks = []
     if args.current_host == args.hosts[0]:
@@ -101,13 +91,11 @@ def main(args):
               validation_data=validation_dataset,
               validation_steps=(num_examples_per_epoch('validation') // args.batch_size) // size,
               callbacks=callbacks)
-
     #score = model.evaluate(eval_dataset['text'], 
     #                       eval_dataset['label'], 
     score = model.evaluate(eval_dataset,
                            steps=num_examples_per_epoch('eval') // args.batch_size,
                            verbose=0)
-
     logging.info('Test loss:{}'.format(score[0]))
     logging.info('Test accuracy:{}'.format(score[1]))
 

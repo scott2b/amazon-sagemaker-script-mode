@@ -5,16 +5,16 @@ import tensorflow_text
 from tensorflow.keras.optimizers import Adam, SGD, RMSprop
 
 
-HEIGHT = 32
-WIDTH = 32
-DEPTH = 3
-NUM_CLASSES = 10
+#HEIGHT = 32
+#WIDTH = 32
+#DEPTH = 3
+#NUM_CLASSES = 10
 
 # hyperparameters
-BATCH_SIZE = 16 # seems to significantly affect the validation curves
-SEED = 123 # random seed
-EPOCHS = 20 # Max epochos. Early stopping is
-EARLY_STOPPING_PATIENCE = 0
+#BATCH_SIZE = 16 # seems to significantly affect the validation curves
+#SEED = 123 # random seed
+#EPOCHS = 20 # Max epochos. Early stopping is
+#EARLY_STOPPING_PATIENCE = 0
 
 
 def make_preprocess_model(sentence_features, preprocessor_url):
@@ -65,19 +65,18 @@ def build_classifier_model():
 def get_loss_function():
     return tf.keras.losses.BinaryCrossentropy(from_logits=True)
 
+
 def get_metrics_function():
     return tf.metrics.BinaryAccuracy()
 
 
 def get_model(learning_rate, weight_decay, optimizer, momentum, size, mpi=False, hvd=False):
-
     if optimizer.lower() == 'sgd':
         opt = SGD(lr=learning_rate * size, decay=weight_decay, momentum=momentum)
     elif optimizer.lower() == 'rmsprop':
         opt = RMSprop(lr=learning_rate * size, decay=weight_decay)
     else:
         opt = Adam(lr=learning_rate * size, decay=weight_decay)
-
     classifier_model = build_classifier_model()
     classifier_model.compile(
         optimizer=opt,
