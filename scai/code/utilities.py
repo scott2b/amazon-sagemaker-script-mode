@@ -73,8 +73,7 @@ def process_input(epochs, batch_size, channel, channel_name, data_config):
         dataset = tf.data.TFRecordDataset(filenames)
     dataset = dataset.repeat(epochs)
     dataset = dataset.prefetch(10)
-    dataset = dataset.map(
-        _dataset_parser, num_parallel_calls=10)
+    dataset = dataset.map(_dataset_parser, num_parallel_calls=10)
     if channel_name == 'train':
         # Ensure that the capacity is sufficiently large to provide good random
         # shuffling.

@@ -81,7 +81,7 @@ def get_model(learning_rate, weight_decay, optimizer, momentum, size, mpi=False,
 
     classifier_model = build_classifier_model()
     classifier_model.compile(
-        optimizer=opt,
+        optimizer=optimizer,
         loss=get_loss_function(),
         metrics=get_metrics_function())
         #loss='binary_crossentropy',

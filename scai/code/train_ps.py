@@ -63,16 +63,22 @@ def main(args):
     eval_dataset = process_input(args.epochs, args.batch_size, args.eval, 'eval', args.data_config)
     validation_dataset = process_input(args.epochs, args.batch_size, args.validation, 'validation', args.data_config)
 
+
+    crime lr = 1.1999607522739098e-06
+    diversity = 1.599953611730598e-06
+
+    optimizer = tf.keras.optimizers.Adam(learning_rate=crime_lr)
+
     ### build optimizer
-    steps_per_epoch = tf.data.experimental.cardinality(train_dataset).numpy()
-    num_train_steps = steps_per_epoch * args.epochs
-    num_warmup_steps = int(0.1*num_train_steps)
-    init_lr = 5e-5
-    optimizer = optimization.create_optimizer(
-        init_lr=init_lr,
-        num_train_steps=num_train_steps,
-        num_warmup_steps=num_warmup_steps,
-        optimizer_type='adamw')
+    #steps_per_epoch = tf.data.experimental.cardinality(train_dataset).numpy()
+    #num_train_steps = steps_per_epoch * args.epochs
+    #num_warmup_steps = int(0.1*num_train_steps)
+    #init_lr = 5e-5
+    #optimizer = optimization.create_optimizer(
+    #    init_lr=init_lr,
+    #    num_train_steps=num_train_steps,
+    #    num_warmup_steps=num_warmup_steps,
+    #    optimizer_type='adamw')
     ###
 
     #print('train_dataset type:', type(train_dataset))
