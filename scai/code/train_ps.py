@@ -64,8 +64,8 @@ def main(args):
     validation_dataset = process_input(args.epochs, args.batch_size, args.validation, 'validation', args.data_config)
 
 
-    crime lr = 1.1999607522739098e-06
-    diversity = 1.599953611730598e-06
+    crime_lr = 1.1999607522739098e-06
+    diversity_lr = 1.599953611730598e-06
 
     optimizer = tf.keras.optimizers.Adam(learning_rate=crime_lr)
 
