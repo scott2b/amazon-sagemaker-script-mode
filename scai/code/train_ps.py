@@ -11,7 +11,7 @@ import tensorflow_text
 import tensorflow.keras.backend as K
 from tensorflow.keras.callbacks import TensorBoard, ModelCheckpoint
 
-from model_def import get_model, HEIGHT, WIDTH, DEPTH, NUM_CLASSES
+#from model_def import get_model, HEIGHT, WIDTH, DEPTH, NUM_CLASSES
 from utilities import process_input
 
 
