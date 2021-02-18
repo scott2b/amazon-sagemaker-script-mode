@@ -61,6 +61,19 @@ def main(args):
     train_dataset = process_input(args.epochs, args.batch_size, args.train, 'train', args.data_config)
     eval_dataset = process_input(args.epochs, args.batch_size, args.eval, 'eval', args.data_config)
     validation_dataset = process_input(args.epochs, args.batch_size, args.validation, 'validation', args.data_config)
+
+    ### build optimizer
+    steps_per_epoch = tf.data.experimental.cardinality(train_dataset).numpy()
+    num_train_steps = steps_per_epoch * EPOCHS
+    num_warmup_steps = int(0.1*num_train_steps)
+    init_lr = 5e-5
+    optimizer = optimization.create_optimizer(
+        init_lr=init_lr,
+        num_train_steps=num_train_steps,
+        num_warmup_steps=num_warmup_steps,
+        optimizer_type='adamw')
+    ###
+
     #print('train_dataset type:', type(train_dataset))
     #print('train_dataset text type:', type(train_dataset['text']))
     #print('train_dataset label type:', type(train_dataset['label']))
@@ -73,29 +86,29 @@ def main(args):
     logging.info("configuring model")
     logging.info("Hosts: "+ os.environ.get('SM_HOSTS'))
     size = len(args.hosts)
-    model = get_model(args.learning_rate, args.weight_decay, args.optimizer, args.momentum, size)
+    model = get_model(args.learning_rate, args.weight_decay, optimizer, args.momentum, size)
     callbacks = []
     if args.current_host == args.hosts[0]:
         callbacks.append(ModelCheckpoint(args.output_data_dir + '/checkpoint-{epoch}.h5'))
-        callbacks.append(CustomTensorBoardCallback(log_dir=tensorboard_dir))
+        #callbacks.append(CustomTensorBoardCallback(log_dir=tensorboard_dir))
     logging.info("Starting training")
-    #X = train_dataset['text']
-    #y = train_dataset['label']
-    #print('LENGTH of X:', len(X))
-    #print('LENGTH of y:', len(y))
+    #history = model.fit(
+    #          x=train_dataset,
+    #          steps_per_epoch=(num_examples_per_epoch('train') // args.batch_size) // size,
+    #          epochs=args.epochs, 
+    #          validation_data=validation_dataset,
+    #          validation_steps=(num_examples_per_epoch('validation') // args.batch_size) // size,
+    #          callbacks=callbacks)
     history = model.fit(
-              x=train_dataset,
-              steps_per_epoch=(num_examples_per_epoch('train') // args.batch_size) // size,
-              epochs=args.epochs, 
-              #validation_data=(validation_dataset['text'], validation_dataset['label']),
-              validation_data=validation_dataset,
-              validation_steps=(num_examples_per_epoch('validation') // args.batch_size) // size,
-              callbacks=callbacks)
-    #score = model.evaluate(eval_dataset['text'], 
-    #                       eval_dataset['label'], 
-    score = model.evaluate(eval_dataset,
-                           steps=num_examples_per_epoch('eval') // args.batch_size,
-                           verbose=0)
+       x=train_dataset,
+       epochs=args.epochs, 
+       validation_data=validation_dataset,
+       callbacks=callbacks)
+    #score = model.evaluate(
+    #    eval_dataset,
+    #    steps=num_examples_per_epoch('eval') // args.batch_size,
+    #    verbose=0)
+    score = model.evaluate(eval_dataset)
     logging.info('Test loss:{}'.format(score[0]))
     logging.info('Test accuracy:{}'.format(score[1]))
 

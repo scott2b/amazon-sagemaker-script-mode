@@ -71,12 +71,14 @@ def get_metrics_function():
 
 
 def get_model(learning_rate, weight_decay, optimizer, momentum, size, mpi=False, hvd=False):
-    if optimizer.lower() == 'sgd':
-        opt = SGD(lr=learning_rate * size, decay=weight_decay, momentum=momentum)
-    elif optimizer.lower() == 'rmsprop':
-        opt = RMSprop(lr=learning_rate * size, decay=weight_decay)
-    else:
-        opt = Adam(lr=learning_rate * size, decay=weight_decay)
+    #if optimizer.lower() == 'sgd':
+    #    opt = SGD(lr=learning_rate * size, decay=weight_decay, momentum=momentum)
+    #elif optimizer.lower() == 'rmsprop':
+    #    opt = RMSprop(lr=learning_rate * size, decay=weight_decay)
+    #else:
+    #    opt = Adam(lr=learning_rate * size, decay=weight_decay)
+
+
     classifier_model = build_classifier_model()
     classifier_model.compile(
         optimizer=opt,
