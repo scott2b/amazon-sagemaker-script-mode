@@ -91,6 +91,8 @@ def main(args):
     logging.info("Starting training")
     X = train_dataset['text']
     y = train_dataset['label']
+    print('LENGTH of X:', len(X))
+    print('LENGTH of y:', len(y))
     history = model.fit(
               x=X, y=y,
               steps_per_epoch=(num_examples_per_epoch('train') // args.batch_size) // size,

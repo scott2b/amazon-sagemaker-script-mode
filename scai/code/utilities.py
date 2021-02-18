@@ -76,11 +76,11 @@ def process_input(epochs, batch_size, channel, channel_name, data_config):
         _dataset_parser, num_parallel_calls=10)
 
     # Potentially shuffle records.
-    #if channel_name == 'train':
-    #    # Ensure that the capacity is sufficiently large to provide good random
-    #    # shuffling.
-    #    buffer_size = int(NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN * 0.4) + 3 * batch_size
-    #    dataset = dataset.shuffle(buffer_size=buffer_size)
+    if channel_name == 'train':
+        # Ensure that the capacity is sufficiently large to provide good random
+        # shuffling.
+        buffer_size = int(NUM_EXAMPLES_PER_EPOCH_FOR_TRAIN * 0.4) + 3 * batch_size
+        dataset = dataset.shuffle(buffer_size=buffer_size)
 
     # Batch it up.
     dataset = dataset.batch(batch_size, drop_remainder=True)
