@@ -13,6 +13,7 @@ from tensorflow.keras.callbacks import TensorBoard, ModelCheckpoint
 from official.nlp import optimization 
 
 #from model_def import get_model, HEIGHT, WIDTH, DEPTH, NUM_CLASSES
+from model_def import get_model
 from utilities import process_input
 
 
